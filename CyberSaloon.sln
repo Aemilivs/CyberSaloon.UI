@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyberSaloon.Server", "Server\CyberSaloon.Server.csproj", "{34F7D393-4208-4B3B-962D-2CC67D584A79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyberSaloon.Client", "Client\CyberSaloon.Client.csproj", "{DD6E5C45-FA77-48EC-B01D-6164B284FFA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34F7D393-4208-4B3B-962D-2CC67D584A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34F7D393-4208-4B3B-962D-2CC67D584A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34F7D393-4208-4B3B-962D-2CC67D584A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34F7D393-4208-4B3B-962D-2CC67D584A79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6E5C45-FA77-48EC-B01D-6164B284FFA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6E5C45-FA77-48EC-B01D-6164B284FFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6E5C45-FA77-48EC-B01D-6164B284FFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6E5C45-FA77-48EC-B01D-6164B284FFA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A86A84B8-FA35-408A-A4B0-CEED64FB6456}
+	EndGlobalSection
+EndGlobal

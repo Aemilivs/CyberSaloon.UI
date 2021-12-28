@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<div class="navbar">
+    <a class="navbar-brand" href="">CyberSaloon</a>
+</div>
+
+<nav class="flex-column">
+    <AuthorizeView>
+        <Authorized>
+            <div class="profile-box">
+                <div class="profile-action">
+                    <NavLink class="nav-link" href="authentication/profile">
+                        🧑 @context.User.Identity.Name
+                    </NavLink>
+                </div>
+
+                <div class="profile-action">
+                    <a class="nav-link" href="/pending" @onclick="BeginSignOut">
+                        🚪 Log out
+                    </a>
+                </div>
+            </div>
+
+            <div class="applications-action">
+                <NavLink class="nav-link" href="/pending">
+                    🟩 Pending applications
+                </NavLink>
+            </div>
+
+            <div class="applications-action">
+                <NavLink class="nav-link" href="/fulfilled">
+                    ✅ Fulfilled applications
+                </NavLink>
+            </div>
+
+            <div class="applications-action">
+                <NavLink class="nav-link" href="/submitted">
+                    📤 Submitted applications
+                </NavLink>
+            </div>
+
+            <div class="applications-action">
+                <NavLink class="nav-link" href="/liked">
+                    ❤️ Liked applications
+                </NavLink>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="account-action">
+                <NavLink class="nav-link" href="authentication/register">
+                    👋 Register
+                </NavLink>
+            </div>
+            <div class="account-action">
+                <NavLink class="nav-link" href="authentication/login">
+                    🚪 Log in
+                </NavLink>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+</nav>
+
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}

@@ -1,0 +1,22 @@
+﻿@using CyberSaloon.Client.Pages.Applications.Pages
+
+<div id="artist-container">
+    @if(ArtistDTO != default)
+    {
+        @* <img src=@ArtistDTO.PhotoUrl width="250px" /> *@
+        <span>@ArtistDTO.Description</span>
+
+        @if (@ArtistDTO.Applications.Count > 0)
+        {
+            <span>@BuildFullfilledCountMessage()</span>
+            <ApplicationsPage Action="by-artist" Id=@ArtistDTO.Id.ToString() />
+        } else 
+        {
+            <span>This user has not fullfilled any application yet.</span>
+        }
+    }
+    else
+    {
+        <h1>Failed to fetch an artist.</h1>
+    }
+</div>

@@ -1,0 +1,27 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <main>
+        <div class="main">
+            <div class="auth">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    🔥 New applications
+                </NavLink>
+                <NavLink class="nav-link" href="/best">
+                    💗 Best applications
+                </NavLink>
+                <NavLink class="nav-link" href="/all-fullfilled">
+                    ✔️ Recently fullfilled
+                </NavLink>
+            </div>
+            <div class="content-box">
+                <div class="content">
+                    @Body
+                </div>
+                <div class="sidebar">
+                    <NavMenu />
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,18 @@
+﻿@using CyberSaloon.Client.Pages.Applications.Pages
+
+<div id="applicant-container">
+    @if(@ApplicantDTO != default)
+    {
+        @if (@ApplicantDTO.Supported.Count > 0)
+        {
+            <span>@BuildSupportedCountMessage()</span>
+            <ApplicationsPage Action="liked" Id=@ApplicantDTO.Id.ToString() />
+        } else {
+            <span>This user has not supported any application yet.</span>
+        }
+    }
+    else
+    {
+        <h2>Failed to fetch an applicant.</h2>
+    }
+</div>

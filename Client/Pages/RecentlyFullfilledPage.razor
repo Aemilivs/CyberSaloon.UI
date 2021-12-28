@@ -1,0 +1,10 @@
+﻿@page "/all-fullfilled/{CurrentPage:int?}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+<ApplicationsPage Action="all-fullfilled" CurrentPage=@(CurrentPage ?? 1) />
+
+@code {
+    [Parameter]
+    public int? CurrentPage { get; set; }
+}

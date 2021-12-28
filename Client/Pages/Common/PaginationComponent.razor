@@ -1,0 +1,10 @@
+<div class="applications-pagination">
+    @for (int index = 1; index <= TotalPages; index++)
+    {
+        <NavLink href=@GeneratePaginationUri(index) @onclick=@StateHasChanged>
+            <div class="page @(CurrentPage == index ? "active" : "")">
+                @index
+            </div>
+        </NavLink>
+    }
+</div>

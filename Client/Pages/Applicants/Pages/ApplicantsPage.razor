@@ -1,0 +1,11 @@
+﻿@page "/applicants"
+
+<div id="applicant-container">
+    <p>Hello</p>
+    @foreach(var applicant in ApplicantsDTO)
+    {
+        <h1>@applicant.Alias</h1>
+        <h2>@applicant.Id</h2>
+    }
+
+</div>

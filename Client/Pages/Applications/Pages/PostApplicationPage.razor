@@ -1,0 +1,34 @@
+﻿@page "/applications/create/{AuthorAlias}"
+
+<h1>Create new application</h1>
+
+@if (IsLoading)
+{
+    <div class="loading-container">
+        <span id="loading-sign">Loading...</span>
+        <img id="spinner" src="/spinner.png" />
+    </div>
+}
+
+@if (IsFailed)
+{
+    <div class="loading-container">
+        <span>Failed to load application create page. ❌</span>
+    </div>
+}
+
+<div class="application-form">
+    <EditForm Model=@Payload OnSubmit=@PostApplicationAsync>
+        <InputText
+            id="summary"
+            @bind-Value=@Payload.Summary
+            placeholder="A summary of the application.">
+        </InputText>
+        <InputTextArea
+            id="description"
+            @bind-Value=@Payload.Description
+            placeholder="A description of the application.">
+        </InputTextArea>
+        <input type="submit" value="Submit" />
+    </EditForm>
+</div>  

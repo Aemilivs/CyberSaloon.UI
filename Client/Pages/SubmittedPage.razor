@@ -1,0 +1,12 @@
+﻿@page "/submitted/{CurrentPage:int?}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+
+<div class="common-page-title">
+    <h1>Applications that you have submitted</h1>
+</div>
+
+<ApplicationsPage 
+        Action="submitted"
+        ErrorMessage="You have not submitted any application yet."
+        CurrentPage=@CurrentPage
+    />

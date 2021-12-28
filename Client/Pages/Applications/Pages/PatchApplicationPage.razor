@@ -1,0 +1,34 @@
+@page "/applications/edit/{ApplicationId}"
+
+<h1>Edit application</h1>
+
+@if (IsLoading)
+{
+    <div class="loading-container">
+        <span id="loading-sign">Loading...</span>
+        <img id="spinner" src="/spinner.png" />
+    </div>
+}
+
+@if (IsFailed)
+{
+    <div class="loading-container">
+        <span>Failed to load application update page. ❌</span>
+    </div>
+}
+
+<div class="application-form">
+    <EditForm Model=@DestinationDTO OnSubmit=@PatchApplicationAsync>
+        <InputText
+            id="summary"
+            @bind-Value=@DestinationDTO.Summary
+            placeholder="A summary of the application.">
+        </InputText>
+        <InputTextArea
+            id="description"
+            @bind-Value=@DestinationDTO.Description
+            placeholder="A description of the application.">
+        </InputTextArea>
+        <input type="submit" value="Submit" />
+    </EditForm>
+</div>  

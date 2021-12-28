@@ -1,0 +1,148 @@
+﻿@page "/profile/{Alias}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+@if (IsLoading)
+{
+    <div class="loading-container">
+        <span id="loading-sign">Loading...</span>
+        <span id="spinner">
+            <img src="/spinner.png" />
+        </span>
+    </div>
+}
+
+@if (IsFailed)
+{
+    <div class="loading-container">
+        <span>Failed to load this profile. ❌</span>
+    </div>
+}
+
+@if (!IsLoading && !IsFailed)
+{
+    <div class="profile-container">
+        <h1>@Alias</h1>
+        <div class="profile-actions">
+            <NavLink class="nav-link" href=@($"/applications/create/{@Alias}")>
+                📝 Create application to this artist
+            </NavLink>
+        </div>
+        
+        <div class="profile-applications-selection">
+            <a 
+                    class=@(Selection == ProfileSelectedApplication.Pending ? "active" : string.Empty) 
+                    @onclick=@(() => Selection = ProfileSelectedApplication.Pending)
+                >
+                    Pending applications
+                </a>
+            <a 
+                    class=@(Selection == ProfileSelectedApplication.Fullfilled ? "active" : string.Empty) 
+                    @onclick=@(() => Selection = ProfileSelectedApplication.Fullfilled)
+                >
+                    Fullfilled applications
+                </a>
+            <a 
+                    class=@(Selection == ProfileSelectedApplication.Submitted ? "active" : string.Empty) 
+                    @onclick=@(() => Selection = ProfileSelectedApplication.Submitted)
+                >
+                    Submitted applications
+                </a>
+            <a 
+                    class=@(Selection == ProfileSelectedApplication.Liked ? "active" : string.Empty) 
+                    @onclick=@(() => Selection = ProfileSelectedApplication.Liked)
+                >
+                    Liked applications
+                </a>
+        </div>
+
+        @if (Selection == ProfileSelectedApplication.Pending)
+        {
+            <div id="artist-container">
+                @if(ArtistDTO != default)
+                {
+                    @if (@ArtistDTO.Applications.Count > 0)
+                    {
+                        <ApplicationsPage Action="pending" Id=@ArtistDTO.Id.ToString() />
+                    } else 
+                    {
+                        <div class="applications-not-found">
+                            <span>This user does not have any pending application yet.</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h1>Failed to fetch an artist.</h1>
+                }
+            </div>
+        }
+
+        @if (Selection == ProfileSelectedApplication.Fullfilled)
+        {
+            <div id="artist-container">
+                @if(ArtistDTO != default)
+                {
+                    @if (@ArtistDTO.Applications.Count > 0)
+                    {
+                        <ApplicationsPage Action="fulfilled" Id=@ArtistDTO.Id.ToString() />
+                    } else 
+                    {
+                        <div class="applications-not-found">
+                            <span>This user has not fullfilled any application yet.</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h1>Failed to fetch an artist.</h1>
+                }
+            </div>
+        }
+
+        @if (Selection == ProfileSelectedApplication.Submitted)
+        {
+            <div id="applicant-container">
+                @if(@ApplicantDTO != default)
+                {
+                    @if (@ApplicantDTO.Applications.Count > 0)
+                    {
+                        <ApplicationsPage Action="submitted" Id=@ApplicantDTO.Id.ToString() />
+                    } 
+                    else 
+                    {
+                        <div class="applications-not-found">
+                            <span>This user has not submitted any application yet.</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h2>Failed to fetch an applicant.</h2>
+                }
+            </div>
+        }
+
+        @if (Selection == ProfileSelectedApplication.Liked)
+        {
+            <div id="applicant-container">
+                @if(@ApplicantDTO != default)
+                {
+                    @if (@ApplicantDTO.Supported.Count > 0)
+                    {
+                        <ApplicationsPage Action="liked" Id=@ApplicantDTO.Id.ToString() />
+                    } else 
+                    {
+                        <div class="applications-not-found">
+                            <span>This user has not liked any application yet.</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h2>Failed to fetch an applicant.</h2>
+                }
+            </div>
+        }
+    </div>
+}

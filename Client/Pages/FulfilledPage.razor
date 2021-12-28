@@ -1,0 +1,12 @@
+﻿@page "/fulfilled/{CurrentPage:int?}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+
+<div class="common-page-title">
+    <h1>Applications submitted by you</h1>
+</div>
+
+<ApplicationsPage 
+        Action="fulfilled"
+        ErrorMessage="You have not fulfilled any application yet."
+        CurrentPage=@CurrentPage
+    />

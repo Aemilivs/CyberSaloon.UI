@@ -1,0 +1,80 @@
+﻿@page "/art/{RawId}"
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+@if (IsLoading)
+{
+    <div class="loading-container">
+        <span id="loading-sign">Loading...</span>
+        <img id="spinner" src="/spinner.png" />
+    </div>
+}
+
+@if (IsFailed)
+{
+    <div class="loading-container">
+        <span>Failed to load art page. ❌</span>
+    </div>
+}
+
+@if (!IsLoading && !IsFailed && ArtDTO != default)
+{
+	<div class="art-container">
+		<div class="art-header">
+			@if (IsStandalone)
+			{
+				<h2>
+					<NavLink href=@($"/art/{ArtDTO.Id}")>@ArtDTO.Summary</NavLink>
+				</h2>
+			} else
+			{
+				<h3>
+					<NavLink href=@($"/art/{ArtDTO.Id}")>@ArtDTO.Summary</NavLink>
+				</h3>
+			}
+			<AuthorizeView>
+        	    <Authorized>
+					@if (ArtIsSubmitted)
+					{
+						<a @onclick=DeleteArtAsync title="Delete Art">
+        			        ❌
+        			    </a>
+					}
+        	    </Authorized>
+			</AuthorizeView>
+		</div>
+
+		<div class="art-body">
+			<div class="art-description">@ProcessDescription()</div>
+        	@if (ArtDTO.Url != string.Empty)
+        	{
+				<div class="art-url">
+					<img src=@ArtDTO.Url width=100%> 
+				</div>
+        	}
+
+			<div class="art-actions">
+				@if(!IsStandalone && ArtDTO.Description.Length > 200)
+            	{
+            	    <NavLink href=@($"/art/{ArtDTO.Id}")>Open art in full page</NavLink>
+            	} else {
+					<a></a>
+				}
+				<AuthorizeView>
+        		    <Authorized>
+						@if (ArtIsSubmitted)
+						{
+							<NavLink class="nav-link" href=@($"/arts/edit/{ArtDTO.Id}")>
+        				        ✏️ Edit Art
+        				    </NavLink>
+						}
+				    </Authorized>
+				</AuthorizeView>
+			</div>
+		</div>
+
+		@if (IsStandalone)
+		{
+			<NavLink href=@($"/application/{ArtDTO.Application}")>Open application in full page</NavLink>
+		}
+	</div>
+}

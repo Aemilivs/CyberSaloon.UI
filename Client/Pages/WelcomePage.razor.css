@@ -1,0 +1,14 @@
+﻿.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    background-color: #0366d611;
+    margin: 1rem;
+    border-radius: 5px;
+}
+
+.welcome-container > p {
+    padding: 1rem;
+}

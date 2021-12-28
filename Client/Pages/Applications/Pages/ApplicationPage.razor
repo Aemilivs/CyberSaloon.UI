@@ -1,0 +1,96 @@
+﻿@page "/application/{ApplicationId}"
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+@using CyberSaloon.Client.Pages.Arts.Pages
+
+@if(ApplicationDTO != default)
+{
+    <div class="application-container @ParseApplicationStatus(ApplicationDTO)">
+        <div class="application-header">
+            <h2><NavLink href=@($"/application/{ApplicationId}")>@ApplicationDTO.Summary</NavLink></h2>
+            <AuthorizeView>
+                <Authorized>
+                    @if(ApplicationIsSubmitted && !ApplicationDTO.Fullfilled)
+                    {
+                        <a @onclick=DeleteApplicationAsync title="Delete application">❌</a>
+                    }
+                </Authorized>
+            </AuthorizeView>
+        </div>
+        
+        <div class="application-body">
+            <div class="application-description">@ProcessDescription()</div>
+            <div class="application-actions">
+                @if(!IsStandalone && ApplicationDTO.Description.Length > 200)
+                {
+                    <NavLink href=@($"/application/{ApplicationId}")>Open application in full page</NavLink>
+                } 
+                else
+                {
+                    <a></a>
+                }
+
+                @if(ApplicationDTO.Art == default)
+                {
+                    <AuthorizeView>
+                        <Authorized>
+                            @if(ApplicationIsDedicatedToClient)
+                            {
+                                <NavLink class="nav-link" href=@($"/arts/create/{ApplicationId}")>
+                                    🎨 Create Art
+                                </NavLink>
+                            }
+                        </Authorized>
+                    </AuthorizeView>
+                }
+                
+                <AuthorizeView>
+                    <Authorized>
+                        @if(ApplicationIsSubmitted)
+                        {
+                            <NavLink class="nav-link" href=@($"/applications/edit/{ApplicationId}")>
+                                ✏️ Edit Application
+                            </NavLink>
+                        }
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+                    
+            @if(ApplicationDTO.Art != default)
+            {
+                <ArtComponent Id=@ApplicationDTO.Art IsStandalone=@false />
+            }
+        </div>
+
+        <div class="application-metadata">
+            <div class="application-parties">
+                <NavLink class="party-link" href=@($"/profile/{ApplicationDTO.Artist}")>
+                        🖌️ To @ApplicationDTO.Artist
+                </NavLink>
+                <NavLink class="party-link" href=@($"/profile/{ApplicationDTO.Author}")>
+                        🖋️ By @ApplicationDTO.Author
+                </NavLink>
+            </div>
+        </div>
+
+        <div class="application-footer">
+            <AuthorizeView>
+                <Authorized>
+                    @if(!ApplicationIsSubmitted)
+                    {
+                        <div class="nav-link like" @onclick=OnLikeAsync>
+                            @(ApplicationIsLiked ? "❤️" : "🤍") Like
+                        </div>
+                    }
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink class="nav-link" href=@($"authentication/login?returnUrl={Uri.EscapeDataString(Navigation.BaseUri + $"application/{ApplicationId}?shouldLike=true")}")>
+                        <div class="nav-link">
+                            🤍 Like
+                        </div>
+                    </NavLink>
+                </NotAuthorized>
+            </AuthorizeView>
+            <span class="likes-count">@BuildLikeCountMessage()</span>
+        </div>
+    </div>
+}

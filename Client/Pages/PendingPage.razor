@@ -1,0 +1,12 @@
+﻿@page "/pending/{CurrentPage:int?}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+
+<div class="common-page-title">
+    <h1>Pending applications addresed to you</h1>
+</div>
+
+<ApplicationsPage 
+        Action="pending"
+        ErrorMessage="You don't have any pending application."
+        CurrentPage=@CurrentPage
+    />

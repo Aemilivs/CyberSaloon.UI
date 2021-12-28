@@ -1,0 +1,39 @@
+@page "/arts/edit/{artId}"
+
+<h1>Edit art</h1>
+
+@if (IsLoading)
+{
+    <div class="loading-container">
+        <span id="loading-sign">Loading...</span>
+        <img id="spinner" src="/spinner.png" />
+    </div>
+}
+
+@if (IsFailed)
+{
+    <div class="loading-container">
+        <span>Failed to load art update page. ❌</span>
+    </div>
+}
+
+<div class="art-form">
+    <EditForm Model=@DestinationDTO OnSubmit=@PatchArtAsync>
+        <InputText
+            id="summary"
+            @bind-Value=@DestinationDTO.Summary
+            placeholder="A summary of the art.">
+        </InputText>
+        <InputTextArea
+            id="description"
+            @bind-Value=@DestinationDTO.Description
+            placeholder="A description of the art.">
+        </InputTextArea>
+        <InputTextArea
+            id="url"
+            @bind-Value=@DestinationDTO.Url
+            placeholder="A url referring to the art.">
+        </InputTextArea>
+        <input type="submit" value="Submit" />
+    </EditForm>
+</div>  

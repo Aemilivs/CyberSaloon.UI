@@ -1,0 +1,69 @@
+﻿@page "/applications"
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+<div id="applications-container">
+
+    @if (IsLoading)
+    {
+        <div class="loading-container">
+            <span id="loading-sign">Loading...</span>
+            <img id="spinner" src="/spinner.png" />
+        </div>
+    }
+    
+    @if (IsFailed)
+    {
+        <div class="loading-container">
+            <span>Failed to load this profile. ❌</span>
+        </div>
+    }
+    
+    @if(!IsFailed)
+    @foreach(var application in applications)
+    {
+        <ApplicationPage ApplicationDTO=application IsStandalone=false />
+    }
+    else
+    {
+        <div class="error-container">
+            <p>@ErrorMessage</p>
+        </div>
+    }
+
+    @if(TotalPages > 1)
+    {
+        <div class="applications-pagination">
+        @if(CurrentPage - 1 > MaxPagesBeforeCurrentPage)
+        {
+            <div class="page">...</div>
+        }
+        @for (
+                var index = 
+                    CurrentPage <= MaxPagesBeforeCurrentPage ? 
+                        1 : 
+                        CurrentPage + MaxPagesAfterCurrentPage >= TotalPages ?
+                            TotalPages - MaxPages + 1 :
+                            CurrentPage - MaxPagesBeforeCurrentPage; 
+                index <= 
+                    (
+                        CurrentPage <= MaxPagesBeforeCurrentPage ?
+                            Math.Min(MaxPages, TotalPages) :
+                            CurrentPage + MaxPagesAfterCurrentPage >= TotalPages ?
+                                TotalPages :
+                                CurrentPage + MaxPagesAfterCurrentPage
+                    ); 
+                index++
+            )
+        {
+            var current = index;
+
+            <div class="page @(CurrentPage == current ? "active" : "")">
+                <a @onclick=@(it => FlipPage(current))>@current</a>
+            </div>
+        }
+        @if(CurrentPage + MaxPagesAfterCurrentPage < TotalPages)
+        {
+            <div class="page">...</div>
+        }
+    </div>
+    }
+</div>

@@ -1,0 +1,38 @@
+﻿@page "/arts/create/{ApplicationId}"
+
+@if (IsLoading)
+{
+    <div class="loading-container">
+        <span id="loading-sign">Loading...</span>
+        <img id="spinner" src="/spinner.png" />
+    </div>
+}
+
+@if (IsFailed)
+{
+    <div class="loading-container">
+        <span>Failed to load art create page. ❌</span>
+    </div>
+}
+
+<div class="art-form">
+    <h1>Create new art</h1>
+    <EditForm Model=@Payload OnSubmit=@PostArtAsync>
+        <InputText
+            id="summary"
+            @bind-Value=@Payload.Summary
+            placeholder="A summary of the art.">
+        </InputText>
+        <InputTextArea
+            id="description"
+            @bind-Value=@Payload.Description
+            placeholder="A description of the art.">
+        </InputTextArea>
+        <InputTextArea
+            id="url"
+            @bind-Value=@Payload.Url
+            placeholder="A url for the media of the art.">
+        </InputTextArea>
+        <input type="submit" value="Submit" />
+    </EditForm>
+</div>  

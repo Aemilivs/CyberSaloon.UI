@@ -1,0 +1,35 @@
+﻿.profile-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    padding: 1rem;
+    background: aliceblue;
+    border-radius: 5px;
+}
+
+.profile-container > h1 {
+    margin: 0;
+}
+
+.profile-applications-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.profile-applications-selection > a.active {
+    font-weight: 600;
+}
+
+.profile-actions {
+    padding: 1rem;
+}
+
+.applications-not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 1rem 0;
+}

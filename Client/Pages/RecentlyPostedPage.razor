@@ -1,0 +1,8 @@
+﻿@page "/{CurrentPage:int?}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+<ApplicationsPage 
+        Action="requested" 
+        CurrentPage=@CurrentPage
+    />

@@ -1,0 +1,10 @@
+﻿@page "/best/{CurrentPage:int?}"
+@using CyberSaloon.Client.Pages.Applications.Pages
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+<ApplicationsPage Action="best" CurrentPage=@CurrentPage/>
+
+@code {
+    [Parameter]
+    public int CurrentPage { get; set; }
+}
