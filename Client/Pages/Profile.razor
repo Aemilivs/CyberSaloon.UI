@@ -23,11 +23,22 @@
 {
     <div class="profile-container">
         <h1>@Alias</h1>
-        <div class="profile-actions">
-            <NavLink class="nav-link" href=@($"/applications/create/{@Alias}")>
-                📝 Create application to this artist
-            </NavLink>
-        </div>
+
+        <AuthorizeView>
+                <Authorized>
+                    @if (!IsOwned)
+                    {
+                        <div class="profile-actions">
+                            <NavLink class="nav-link" href=@($"/applications/create/{@Alias}")>
+                                📝 Create application to this artist
+                            </NavLink>
+                        </div>
+                    }
+                </Authorized>
+                <NotAuthorized>
+                    <span>Please, sign in in order to leave an application for this artist.</span>
+                </NotAuthorized>
+            </AuthorizeView>
         
         <div class="profile-applications-selection">
             <a 
