@@ -198,9 +198,15 @@ namespace CyberSaloon.Client.Pages.Applications.Pages
                     Guid.Parse(ApplicationId);
             
             if(await ApplicationIsLikedAsync())
+            {
                 await Client.GetDefyAsync(guid);
+                ApplicationDTO.Applicants.Remove(guid);
+            }
             else
+            {
                 await Client.GetApplyAsync(guid);
+                ApplicationDTO.Applicants.Add(guid);
+            }
 
             WasLiked = !WasLiked;
             ApplicationIsLiked = !ApplicationIsLiked;
