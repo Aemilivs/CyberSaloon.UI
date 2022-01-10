@@ -13,7 +13,7 @@
         <Authorized>
             <div class="profile-box">
                 <div class="profile-action">
-                    <NavLink class="nav-link" href="/profile">
+                    <NavLink class="nav-link" href=@($"/profile/{context.User.Identity.Name}")>
                         🧑 @context.User.Identity.Name
                     </NavLink>
                 </div>
