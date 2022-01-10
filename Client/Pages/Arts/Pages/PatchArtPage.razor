@@ -1,6 +1,5 @@
 @page "/arts/edit/{artId}"
 
-<h1>Edit art</h1>
 
 @if (IsLoading)
 {
@@ -18,6 +17,7 @@
 }
 
 <div class="art-form">
+    <h1>Edit art</h1>
     <EditForm Model=@DestinationDTO OnSubmit=@PatchArtAsync>
         <InputText
             id="summary"
