@@ -1,6 +1,5 @@
 ﻿@page "/applications/create/{AuthorAlias}"
 
-<h1>Create new application</h1>
 
 @if (IsLoading)
 {
@@ -18,6 +17,7 @@
 }
 
 <div class="application-form">
+    <h1>Create new application</h1>
     <EditForm Model=@Payload OnSubmit=@PostApplicationAsync>
         <InputText
             id="summary"

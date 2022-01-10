@@ -280,6 +280,10 @@ namespace CyberSaloon.Client.Pages.Applications.Pages
         private string BuildLikeCountMessage()
         {
             var count = ApplicationDTO.Applicants.Count();
+
+            if (ApplicationIsLiked)
+                count++;
+
             var subject = 
                 count == 1 ? 
                     "applicant" : 
