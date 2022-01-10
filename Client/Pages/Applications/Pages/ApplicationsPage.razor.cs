@@ -76,8 +76,6 @@ namespace CyberSaloon.Client.Pages.Applications.Pages
             StateHasChanged();
 
             TotalPages = response.TotalPages;
-            //await base.OnParametersSetAsync().ConfigureAwait(false);
-            //Navigation.NavigateTo(Navigation.Uri, forceLoad: false);
         }
 
         protected string GeneratePaginationLink(int index)
